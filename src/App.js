@@ -5,11 +5,13 @@ import Navbar from './components/Navbar';
 import Profiles from './pages/Profiles';
 import Page404 from './pages/Page404';
 import Footer from './components/Footer'
+import ScrollToTop from './pages/ScrollToTop';
 
 function App() {
   return (
     <>
       <BrowserRouter>
+      <ScrollToTop/>
       <Navbar/>
         <Routes>
           <Route path='/' element={<Home/>} />
