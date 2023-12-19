@@ -20,7 +20,7 @@ const WebsiteOverview = () => {
         </ul>
       </p>
       <p>
-        <strong>Backend (JSON Server):</strong>
+        <strong>Backend :</strong>
         <ul>.
           <li>Flexyog's backend is powered by Express.js, creating a RESTful API for seamless interactions with our MongoDB database. This dynamic duo ensures efficient CRUD operations, allowing users to manage and persist data with ease.</li>
           <li> server : <a href="https://flexyogbackend.onrender.com/api" target="_blank" rel="noopener noreferrer">click here</a></li>
