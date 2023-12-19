@@ -1,0 +1,77 @@
+.container-fluid {
+    margin: 0 7%;
+    padding: 0;
+}
+
+
+
+@media screen and (max-width: 350px) {
+    .container-fluid {
+        margin: 0;
+    }
+}
+
+
+.navbar {
+    background-color: #E8F9FD;
+    /* border-bottom: 1px solid gray; */
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+    background-color: #E8F9FD;
+    width: 100%;
+}
+
+.nav-link {
+    font-weight: 500;
+    margin-left: 10px;
+
+}
+
+.navbar-brand {
+    /* font-family:cursive ; */
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 600;
+    font-size: x-large;
+}
+
+.install-btn {
+    border: 2px solid #537FE7;
+    border-radius: 10px;
+    font-weight: 600;
+    height: 40px;
+    margin-right: 25px;
+    color: #537FE7;
+    padding: 0 10px;
+}
+
+
+
+.btn-login {
+    border: 2px solid #537FE7;
+    border-radius: 10px;
+    font-weight: 600;
+    background-color: #537FE7;
+    color: white;
+    height: 40px;
+    padding: 0 40px;
+
+
+}
+
+.btn-login:hover {
+    opacity: 0.8;
+}
+
+.tagline {
+    margin: 0;
+}
+
+
+
+.navbar-nav .nav-item .nav-link:not(.active) {
+    text-decoration: none;
+}
+
+.nav-link.active {
+    text-decoration: underline red 5px;
+    position: relative;
+}

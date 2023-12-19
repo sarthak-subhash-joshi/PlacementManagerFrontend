@@ -1,0 +1,12 @@
+.overview-container{
+    margin: 5% 5% 1%;
+    padding: 10px;
+    background-color: #F3F3F3;
+    /* background-color: #DAFFFB; */
+    /* background-color: #F1EFEF; */
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.overview-headings{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
