@@ -28,7 +28,7 @@ Here are some future improvements that can be made to the Flexyog application:
 
 ## ER Diagram
 
-https://imgur.com/a/4sH5FcK
+! [CHEESE!] (https://github.com/sarthak-subhash-joshi/FlexMoneyAssignmentFrontend/assets/123321862/5b60d788-5442-4d72-9658-7a083a40dd49)
 
 
 
