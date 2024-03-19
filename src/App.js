@@ -5,7 +5,10 @@ import Navbar from './components/Navbar';
 import Profiles from './pages/Profiles';
 import Page404 from './pages/Page404';
 import Footer from './components/Footer'
+import ListJobs from './pages/ListJobs';
 import ScrollToTop from './pages/ScrollToTop';
+import AddStudent from './components/AddStudent';
+import ProfileDetails from './pages/ProfileDetails';
 
 function App() {
   return (
@@ -16,6 +19,9 @@ function App() {
         <Routes>
           <Route path='/' element={<Home/>} />
           <Route path='/profiles' element={<Profiles/>} />
+          <Route path='/add_student' element={<AddStudent/>} />
+          <Route path='/opening' element={<ListJobs/>} />
+          <Route path='/profile/:id' element={<ProfileDetails/>}/>
           <Route path='/*' element={<Page404/>} />
         </Routes>
         <Footer/>

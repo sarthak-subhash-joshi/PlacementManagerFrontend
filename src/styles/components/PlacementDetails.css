@@ -1,0 +1,11 @@
+.delete-icon{
+    color: red;
+    font-weight: bolder;
+    font-size: x-large;
+}
+
+.delete-icon:hover{
+    cursor: pointer;
+    opacity: 0.5;
+    /* color: green; */
+}

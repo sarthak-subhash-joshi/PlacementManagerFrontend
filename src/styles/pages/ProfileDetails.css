@@ -1,0 +1,18 @@
+ .profile-container {
+    margin: 0 auto;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+.profile-details{
+    margin-top: 50px;
+}
+  
+.placement-details-outer-container{
+    margin: 2% 7%;
+}
+
+.placement-details{
+    margin-top: 40px;
+}

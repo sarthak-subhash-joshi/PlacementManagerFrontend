@@ -1,26 +1,26 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import '../styles/components/Navbar.css';
-import logo from '../assets/logo.jpeg';
+import logo from '../assets/logo.png';
 
 const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg sticky-top">
+    <nav className="navbar navbar-expand-lg sticky-top navbar-dark bg-dark ">
       <div className="container-fluid">
         <div style={{ position: 'relative' }}>
-          <NavLink className="navbar-brand" to='/'>
+          <NavLink className="navbar-brand-name" to='/'>
             <img
               src={logo}
               alt=""
               style={{
-                width: '80px',
+                width: '50px',
                 height: '50px',
                 borderRadius: '5%'
               }}
             />{' '}
-            Flexyog
+            Placement Manager
           </NavLink>
-          <p className="tagline">Thrive, Wellness, and Harmony</p>
+          {/* <p className="tagline">Thrive, Wellness, and Harmony</p> */}
         </div>
 
         <button
@@ -42,8 +42,13 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" activeClassName="active" to='/profiles'>
-                User Profiles
+              <NavLink className="nav-link" activeClassName="active" exact to='/profiles'>
+                Profiles
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" activeClassName="active" to='/opening'>
+                List jobs
               </NavLink>
             </li>
           </ul>

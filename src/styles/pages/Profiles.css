@@ -1,12 +1,14 @@
 
 .subject-container{
-    margin: 3% 5% 1%;
+    margin: 2% 5% 1%;
     
 }
 
 .search-bar-container{
     margin: 2% 5% 0;
 }
+
+
 
 tr{
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
@@ -27,13 +29,22 @@ tr{
 }
 
 .search-label{
-    /* font-size: large; */
-    margin-right: 5px;
+    font-size: large;
+    margin: 10px;
+    color: gray;
 }
 
 .search-input{
-    border: 1px solid;
-    height: 35px;
+    border: 2px solid;
+    height: 40px;
+    max-width: 600px;
+}
+
+.search-bar-container{
+    background-color: #B0C5A4;
+    padding: 20px 10px;
+    background-color: #EEEDEB;
+    margin-bottom: 20px;
 }
 
 .ans-btn-container{
@@ -66,18 +77,43 @@ i{
     margin: 2% 5% 1%;
 }
 
+#addUserBtn{
+    margin: 10px 0 10px;
+}
 
+/* .add-delete-btns-container{
+    position: absolute;
+    right: 0;
+    margin-bottom: 20px;
+} */
+
+.pagination-container{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.pagination-btn{
+    margin: 0px 5px;
+    border: none;
+    border-radius: 10px;
+    
+}
+
+ .selected-row {
+    background-color: #30E3DF !important;
+}
   
 
 
 /* css for loader start */
 
 .loader {
-    border: 5px solid #83A2FF;
+    border: 10px solid #83A2FF;
     border-radius: 50%;
-    border-top: 5px solid #000;
-    width: 50px;
-    height: 50px;
+    border-top: 10px solid #000;
+    width: 70px;
+    height: 70px;
     -webkit-animation: spin 2s linear infinite; /* Safari */
     animation: spin 2s linear infinite;
   }
@@ -97,17 +133,21 @@ i{
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
     margin: 50px;
   }
 
 /* css for loader end */
 
+.preview-icon{
+    color: blue;
+    font-weight: bolder;
+   font-size: x-large;
+}
 
-.goToHomeBtn{
-    background-color: transparent;
-    border:none;
-    margin: 50px 0 0 50px;
+.preview-icon:hover{
+    cursor: pointer;
+    opacity: 0.5;
+    color: green;
 }
 
 
