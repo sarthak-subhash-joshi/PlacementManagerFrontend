@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import '../styles/components/Navbar.css';
 import logo from '../assets/logo.png';
 
 const Navbar = () => {
+  const [collapsed, setCollapsed] = useState(true);
+
+  const toggleNavbar = () => {
+    setCollapsed(!collapsed);
+  };
+
+  const closeNavbar = () => {
+    setCollapsed(true);
+  };
+
   return (
-    <nav className="navbar navbar-expand-lg sticky-top navbar-dark bg-dark ">
+    <nav className="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
       <div className="container-fluid">
         <div style={{ position: 'relative' }}>
-          <NavLink className="navbar-brand-name" to='/'>
+          <NavLink className="navbar-brand-name" to="/" onClick={closeNavbar}>
             <img
               src={logo}
               alt=""
@@ -20,34 +30,41 @@ const Navbar = () => {
             />{' '}
             Placement Manager
           </NavLink>
-          {/* <p className="tagline">Thrive, Wellness, and Harmony</p> */}
         </div>
 
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul style={{textAlign:'center'}} className="navbar-nav me-auto ms-auto mb-2 mb-lg-0">
+        {/* Conditionally render close button when navbar is open */}
+        {collapsed ? (
+          <button
+            className="navbar-toggler"
+            type="button"
+            onClick={toggleNavbar}
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+        ) : (
+          <button
+            className="close-btn"
+            type="button"
+            onClick={closeNavbar}
+          >
+            &times;
+          </button>
+        )}
+
+        <div className={`collapse navbar-collapse ${collapsed ? '' : 'show'}`} id="navbarSupportedContent">
+          <ul style={{ textAlign: 'center' }} className="navbar-nav me-auto ms-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <NavLink className="nav-link" activeClassName="active" exact to='/'>
+              <NavLink className="nav-link" activeClassName="active" exact to="/" onClick={closeNavbar}>
                 Home
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" activeClassName="active" exact to='/profiles'>
+              <NavLink className="nav-link" activeClassName="active" exact to="/profiles" onClick={closeNavbar}>
                 Profiles
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" activeClassName="active" to='/opening'>
+              <NavLink className="nav-link" activeClassName="active" to="/opening" onClick={closeNavbar}>
                 List jobs
               </NavLink>
             </li>

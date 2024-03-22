@@ -3,6 +3,7 @@ import { usePlacementRecordContext } from '../hooks/usePlacementRecordContext';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { BASE_URL } from '../Helper';
 
 const AddPlacementForm = ({studentId}) => {
   const{dispatch}=usePlacementRecordContext();
@@ -22,7 +23,7 @@ const AddPlacementForm = ({studentId}) => {
     }
 
     try{
-      const response=await axios.post(`/api/placement_record`,formdata)
+      const response=await axios.post(`${BASE_URL}/api/placement_record`,formdata)
       const data=response.data
       dispatch({type:'CREATE_PLACEMENT_RECORD',payload:data})
       toast.success("New record added successfully!");

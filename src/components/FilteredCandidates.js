@@ -1,23 +1,31 @@
 // FilteredCandidates.js
-import React from 'react';
-import '../styles/components/FilteredCandidates.css';
+import React from "react";
+import "../styles/components/FilteredCandidates.css";
+import GridLoader from "react-spinners/GridLoader";
 
-const FilteredCandidates = ({ candidates, flag }) => {
+const FilteredCandidates = ({ candidates, flag, loading }) => {
   const copyAllToClipboard = () => {
-    const allEmails = candidates.map(candidate => candidate.email).join('\n');
+    const allEmails = candidates.map((candidate) => candidate.email).join("\n");
     navigator.clipboard
       .writeText(allEmails)
-      .then(() => alert('All emails copied to clipboard'))
-      .catch((error) => console.error('Failed to copy:', error));
+      .then(() => alert("All emails copied to clipboard"))
+      .catch((error) => console.error("Failed to copy:", error));
   };
 
   const downloadCSV = () => {
-    const headers = ["First Name", "Last Name", "Email", "UG Aggregate", "Gender"];
+    const headers = [
+      "First Name",
+      "Last Name",
+      "Email",
+      "UG Aggregate",
+      "Gender",
+    ];
     const csvContent =
       "data:text/csv;charset=utf-8," +
-      headers.join(",") + "\n" +
+      headers.join(",") +
+      "\n" +
       candidates
-        .map(candidate => {
+        .map((candidate) => {
           return `${candidate.firstName},${candidate.lastName},${candidate.email},${candidate.UGAggregate},${candidate.gender}`;
         })
         .join("\n");
@@ -39,36 +47,59 @@ const FilteredCandidates = ({ candidates, flag }) => {
 
     link.click();
   };
-  
+
   return (
     <div className="filtered-candidates-container-inside">
-      <h4 className="form-heading">Filtered Candidates</h4>
+      <h4 className="form-heading">Eligible Candidates</h4>
       {candidates.length > 0 ? (
         <>
           <ul>
             {candidates.map((candidate, index) => (
-              <p style={{ margin: '0' }} key={index}>
+              <p style={{ margin: "0" }} key={index}>
                 {index + 1}{" "}
-                <span style={{ fontWeight: 'bold', marginRight: '10px', marginLeft: '0' }}>
-                  {') '}
+                <span
+                  style={{
+                    fontWeight: "bold",
+                    marginRight: "10px",
+                    marginLeft: "0",
+                  }}
+                >
+                  {") "}
                 </span>{" "}
                 {candidate.email}
               </p>
             ))}
           </ul>
           <div>
-            <button className="btn btn-success copy-icon-btn" onClick={copyAllToClipboard}>
+            <button
+              className="btn btn-success copy-icon-btn"
+              onClick={copyAllToClipboard}
+            >
               <i className="fa-regular fa-copy copy-icon"></i>{" "}
-              <span style={{ margin: '5px' }}>Copy to Clipboard</span>
+              <span style={{ margin: "5px" }}>Copy to Clipboard</span>
             </button>
-            <button className="btn btn-primary download-icon-btn" onClick={downloadCSV}>
+            <button
+              className="btn btn-primary download-icon-btn"
+              onClick={downloadCSV}
+            >
               <i className="fa-solid fa-download download-icon"></i>{" "}
-              <span style={{ margin: '5px' }}>Download as CSV</span>
+              <span style={{ margin: "5px" }}>Download as CSV</span>
             </button>
           </div>
         </>
+      ) : flag ? (
+        loading ? (
+          <div className="filtering-loader">
+            <GridLoader color="gray" />{" "}
+            <p style={{ color: "gray" }}>
+              Please check your internet connection and try again
+            </p>
+          </div>
+        ) : (
+          <p style={{fontSize:'x-large',textAlign:'center'}}><strong>No such candidates found</strong></p>
+        )
       ) : (
-        flag ? <p>No such candidates found</p> : <p>Apply criteria to find eligible candidates.</p>
+        <p style={{textAlign:'center'}}>Apply criteria to find eligible candidates.</p>
       )}
     </div>
   );

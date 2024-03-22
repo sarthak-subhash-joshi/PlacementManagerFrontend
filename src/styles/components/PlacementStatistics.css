@@ -1,0 +1,47 @@
+.placement-statistics-container{
+    margin: 5% 7%;
+    margin-top: 40px;
+}
+
+.placement-statistics-heading{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #FF204E;
+    font-size: xx-large;
+    margin-bottom: 20px;
+}
+
+.container-inside{
+    margin: 10px;
+    background-color: #f0f0f0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding:20px 5px 10px;
+    margin-bottom: 30px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    border: 2px solid #EEEEEE;
+    display: flex;
+}
+
+.statistics-value-pacement {
+    font-size: xx-large;
+    font-weight: bold;
+    color: #007bff;
+    margin-left: 20px;
+    padding: 5px;
+    border: 2px solid #7FC7D9;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  }
+
+.Statistics-type{
+    font-size: x-large;
+    margin-bottom: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #0B60B0;
+}
+
+.note-message{
+    margin-top: 10px;
+    bottom: 0;
+    color: #5356FF;
+    margin-left: 50px;
+}

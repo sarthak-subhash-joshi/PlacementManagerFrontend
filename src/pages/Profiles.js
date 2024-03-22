@@ -6,6 +6,7 @@ import { useStudentRecordContext } from "../hooks/useStudentRecordContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PacmanLoader from "react-spinners/FadeLoader";
+import { BASE_URL } from "../Helper";
 
 
 const Profiles = () => {
@@ -23,7 +24,7 @@ const Profiles = () => {
 
   const fetchRecordCount = async () => {
     try {
-      const response = await axios.get(`/api/student_record?q=${searchTerm}`);
+      const response = await axios.get(`${BASE_URL}/api/student_record?q=${searchTerm}`);
       const totalRecords = response.data.length;
       setTotalPages(Math.ceil(totalRecords / pageSize));
 
@@ -39,12 +40,13 @@ const Profiles = () => {
   const handleDelete = async (studentId) => {
     if (window.confirm("Are you sure you want to delete this record?")) {
       try {
-        await axios.delete(`/api/student_record/${studentId}`);
+        await axios.delete(`${BASE_URL}/api/student_record/${studentId}`);
         toast.success("Record deleted successfully!");
         dispatch({ type: "DELETE_STUDENT_RECORD", payload: studentId });
         fetchRecordCount(); // Update pagination after deletion
       } catch (error) {
         console.error("Error deleting student record:", error);
+        toast.error("Error deleting student record");
       }
     }
   };
@@ -110,8 +112,14 @@ const Profiles = () => {
               <th className="row-border">Mobile Number</th>
               <th className="row-border">Course</th>
               <th className="row-border">Branch</th>
-              <th id="BtnContainer" className="row-border">
-                {/* Delete */}
+              <th className="row-border">
+                  Preview
+              </th>
+              <th  className="row-border">
+                  Delete
+              </th>
+              <th  className="row-border">
+                  Edit
               </th>
             </tr>
           </thead>
@@ -127,11 +135,14 @@ const Profiles = () => {
                 <td className="row-border">{student.mobileNo}</td>
                 <td className="row-border">{student.course}</td>
                 <td className="row-border">{student.branch}</td>
-                <td id="BtnContainer" className="row-border">
-                  {/* <button onClick={() => handleDelete(student._id)}>
-                    <i className="fa-solid fa-trash"></i>
-                  </button> */}
+                <td  className="row-border btn-container">
                   <NavLink to={`/profile/${student._id}`}>  <i className="fa-regular fa-eye preview-icon"></i></NavLink>
+                </td>
+                <td id="BtnContainer" className="row-border btn-container">
+                    <i className="fa-solid fa-trash delete-icon" onClick={() => handleDelete(student._id)}></i>
+                </td>
+                <td id="BtnContainer" className="row-border btn-container">
+                <NavLink to={`/update_student_record/${student._id}`}> <i class="fa-solid fa-pen-to-square update-icon"></i></NavLink>
                 </td>
               </tr>
             ))}

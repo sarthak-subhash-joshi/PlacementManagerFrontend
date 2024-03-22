@@ -5,6 +5,7 @@ import "../styles/pages/ProfileDetails.css";
 import PacmanLoader from "react-spinners/FadeLoader";
 import AddPlacementForm from "../components/AddPlacementForm";
 import PlacementDetails from "../components/PlacementDetails";
+import { BASE_URL } from "../Helper";
 
 const ProfileDetails = () => {
   const { id } = useParams();
@@ -13,7 +14,7 @@ const ProfileDetails = () => {
   useEffect(() => {
     const fetchStudentDetails = async () => {
       try {
-        const response = await axios.get(`/api/student_record/${id}`);
+        const response = await axios.get(`${BASE_URL}/api/student_record/${id}`);
         setStudent(response.data);
       } catch (error) {
         console.error("Error fetching student details:", error);
@@ -23,8 +24,12 @@ const ProfileDetails = () => {
     fetchStudentDetails();
   }, [id]);
 
+
+
   return (
-    <div className="profile-container">
+   <>
+
+     <div className="profile-container">
       {student ? (
         <div className="profile-details">
           <div style={{ overflowX: "auto" }}>
@@ -79,6 +84,7 @@ const ProfileDetails = () => {
         <PacmanLoader color="#36d7b7" />
       )}
     </div>
+   </>
   );
 };
 

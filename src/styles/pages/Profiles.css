@@ -58,16 +58,45 @@ tr{
     height: auto;
 }
 
-#BtnContainer{
+.btn-container{
     text-align: center;
 }
 
-#updateBtn:hover,#deleteBtn:hover{
-    opacity: 0.4;
+
+.delete-icon{
+    color: red;
+    margin-top: 10px;
 }
 
 i{
     font-size: large;
+}
+
+.preview-icon{
+    color: blue;
+    font-weight: bolder;
+   font-size: x-large;
+   margin-top: 10px;
+}
+
+.preview-icon:hover{
+    cursor: pointer;
+    opacity: 0.5;
+    color: green;
+}
+
+
+.update-icon{
+    color: #124076;
+    font-weight: bolder;
+   font-size: x-large;
+   margin-top: 10px;
+}
+
+.update-icon:hover{
+    cursor: pointer;
+    opacity: 0.5;
+    color: green;
 }
 
 .container-home-top{
@@ -138,17 +167,6 @@ i{
 
 /* css for loader end */
 
-.preview-icon{
-    color: blue;
-    font-weight: bolder;
-   font-size: x-large;
-}
-
-.preview-icon:hover{
-    cursor: pointer;
-    opacity: 0.5;
-    color: green;
-}
 
 
 

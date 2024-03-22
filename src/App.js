@@ -9,6 +9,7 @@ import ListJobs from './pages/ListJobs';
 import ScrollToTop from './pages/ScrollToTop';
 import AddStudent from './components/AddStudent';
 import ProfileDetails from './pages/ProfileDetails';
+import UpdateStudentRecord from './pages/UpdateStudentRecord';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path='/add_student' element={<AddStudent/>} />
           <Route path='/opening' element={<ListJobs/>} />
           <Route path='/profile/:id' element={<ProfileDetails/>}/>
+          <Route path='/update_student_record/:id' element={<UpdateStudentRecord/>} />
           <Route path='/*' element={<Page404/>} />
         </Routes>
         <Footer/>

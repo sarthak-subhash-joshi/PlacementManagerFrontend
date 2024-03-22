@@ -1,14 +1,23 @@
-@media screen and (min-width: 992px) {
+/* @media screen and (min-width: 992px) {
     .container-bar-graph{
-        margin: 5% 7%;
         width: 700px;
     }
   }
 
-  .bar-graph-heading{
-    margin-bottom: 20px;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bolder;
+  .container-bar-graph{
+    margin: 5% 7%;
+  } */
+
+  .container-graph-main{
+    margin: 30px 3%;
+    display: flex;
+    justify-content: space-around;
+  }
+
+   @media screen and (min-width: 400px) {
+    .container-pie-chart{
+      width: 400px;
+    }
   }
 
   .total-statistics-container {
@@ -32,7 +41,6 @@
   
   .statistics-title {
     font-size: xx-large;
-    color: #333;
     margin-bottom: 10px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: #0B60B0;
@@ -54,3 +62,14 @@
     align-items: center;
   }
   
+  .bar-graph-heading{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #FF204E;
+    font-size: xx-large;
+    margin-bottom: 20px;
+    margin-top: 40px;
+  }
+
+  .select-option-college-student-statistics{
+    width: 100px;
+  }

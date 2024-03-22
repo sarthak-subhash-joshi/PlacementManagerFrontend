@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import FilteredCandidates from '../components/FilteredCandidates';
 import axios from 'axios';
 import '../styles/pages/ListJobs.css';
+import { BASE_URL } from '../Helper';
 
 const ListJobs = ({ onSubmit }) => {
   const [minPercentage, setMinPercentage] = useState('');
@@ -12,8 +13,12 @@ const ListJobs = ({ onSubmit }) => {
   const [flag,setFlag]=useState(false);
   const [selection, setSelection] = useState(''); // To track the selection (Unplaced or Anyone)
 
+  const [loading,setLoading]=useState(false);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    setLoading(true)  //setting loading 
 
     if (!selection) { // If no selection has been made
       alert('Please select "Unplaced" or "Anyone" before submitting.'); // Show alert
@@ -22,7 +27,7 @@ const ListJobs = ({ onSubmit }) => {
   
     try {
       // Fetch placement records from the API endpoint
-      const placementResponse = await axios.get('http://localhost:4000/api/placement_record/');
+      const placementResponse = await axios.get(`${BASE_URL}/api/placement_record/`);
       const placementData = placementResponse.data;
   
       // Create a map of studentId to maximum CTC among placements for each student
@@ -36,7 +41,7 @@ const ListJobs = ({ onSubmit }) => {
       });
   
       // Fetch candidates from the API endpoint
-      const candidateResponse = await axios.get('http://localhost:4000/api/student_record/');
+      const candidateResponse = await axios.get(`${BASE_URL}/api/student_record/`);
       const candidateData = candidateResponse.data;
 
       // Filter candidates based on criteria
@@ -74,6 +79,10 @@ const ListJobs = ({ onSubmit }) => {
   
       // Update the state with filtered candidates
       setFilteredCandidates(candidateDetails);
+
+       // Set loading to false when data is fetched
+       setLoading(false);
+
     } catch (error) {
       console.error('Error fetching or processing data:', error);
     }
@@ -140,7 +149,7 @@ const ListJobs = ({ onSubmit }) => {
                   onChange={() => setSelection('Anyone')}
                   required
                 />
-                <label htmlFor="anyone">Anyone</label>
+                <label htmlFor="anyone">Below certain CTC students</label>
               </div>
             </div>
 
@@ -160,12 +169,12 @@ const ListJobs = ({ onSubmit }) => {
               </div>
             )}
 
-            <button className='btn btn-success' type="submit">Submit</button>
+            <button disabled={loading} className='btn btn-success' type="submit">Submit</button>
 
           </form>
         </div>
         <div style={{ position: 'relative' }} className="filtered-candidates-container  col-lg-4">
-          <FilteredCandidates candidates={filteredCandidates} flag={flag} />
+          <FilteredCandidates loading={loading} candidates={filteredCandidates} flag={flag} />
         </div>
       </div>
     </>

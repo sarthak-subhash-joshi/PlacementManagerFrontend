@@ -2,3 +2,9 @@
     display: block;
     margin: 10px 0;
 }
+
+
+.filtering-loader{
+    text-align: center;
+    padding: 0;
+  }

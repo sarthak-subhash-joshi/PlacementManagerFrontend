@@ -4,6 +4,7 @@ import axios from "axios";
 import { useStudentRecordContext } from "../hooks/useStudentRecordContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { BASE_URL } from "../Helper";
 
 function AddStudent() {
   const { dispatch } = useStudentRecordContext();
@@ -24,7 +25,7 @@ function AddStudent() {
   const [UGAggregate, setUGAggregate] = useState("");
   const [PGAggregate, setPGAggregate] = useState("");
   const [error, setError] = useState("");
-  const [isButtonDisabled, setButtonDisabled] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,11 +47,13 @@ function AddStudent() {
       PGAggregate,
     };
 
-    const regex = /^[0-9]{0,10}$/;
-
     try {
-      const response = await axios.post("/api/student_record", formData);
+      const response = await axios.post(
+        `${BASE_URL}/api/student_record`,
+        formData
+      );
       const data = response.data;
+      setIsButtonDisabled(true);
       dispatch({ type: "CREATE_STUDENT_RECORD", payload: data });
       toast.success("New record added successfully!");
       setFirstName("");
@@ -107,6 +110,8 @@ function AddStudent() {
       } else {
         setError("Network Error: Please check your internet connection.");
       }
+    } finally {
+      setIsButtonDisabled(false);
     }
   };
 
@@ -226,11 +231,18 @@ function AddStudent() {
             </div>
             <div className="form-group col-lg-3">
               <label>Course:</label>
-              <input
-                type="text"
+              <select
                 value={course}
                 onChange={(e) => setCourse(e.target.value)}
-              />
+              >
+                <option disabled value="">
+                  Select Course
+                </option>
+                <option value="B.Tech">B.Tech</option>
+                <option value="BE">BE</option>
+                <option value="BCA">BCA</option>
+                <option value="MCA">MCA</option>
+              </select>
             </div>
             <div className="form-group col-lg-3">
               <label htmlFor="branch">Branch of Engineering:</label>
@@ -239,7 +251,9 @@ function AddStudent() {
                 value={branch}
                 onChange={(e) => setBranch(e.target.value)}
               >
-                <option value="" disabled>Select Branch</option>
+                <option value="" disabled>
+                  Select Branch
+                </option>
                 <option value="Computer Science">Computer Science</option>
                 <option value="Information Technology">
                   Information Technology
@@ -257,9 +271,11 @@ function AddStudent() {
                 <option value="Electronics and Communication">
                   Electronics and Communication
                 </option>
-                <option value="Aerospace Engineering">
+                <option value="BCA">BCA</option>
+                <option value="MCA">MCA</option>
+                {/* <option value="Aerospace Engineering">
                   Aerospace Engineering
-                </option>
+                </option> */}
               </select>
             </div>
           </div>

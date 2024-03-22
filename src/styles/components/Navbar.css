@@ -54,3 +54,20 @@
 .navbar-toggler:focus {
     outline: none;
   }
+
+.close-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #fff;
+    font-size: 2rem;
+    margin: 0.5rem;
+  }
+  
+  .close-icon {
+    transform: rotate(45deg);
+  }  
