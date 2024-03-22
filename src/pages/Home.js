@@ -18,7 +18,7 @@ const Home = () => {
     PCCOER: 0,
     NMIT: 0,
   });
-  const [totalNoOfStudents, setTotalNoOfStudents] = useState(0);
+
   const [totalOffers, setTotalOffers] = useState(0);
   const [loading, setLoading] = useState(true); 
 
@@ -37,8 +37,6 @@ const Home = () => {
 
         setStudentDataRecords(studentData);   //setting this to transfer this data to PlacementStatistics component
 
-        // Setting total no of students present in student record
-        setTotalNoOfStudents(studentData.length);
 
         // Initialize totals object
         const totals = { PCCOE: 0, PCCOER: 0, NMIT: 0 };
@@ -54,6 +52,7 @@ const Home = () => {
           }
         });
 
+
         // Update state with total students data
         setCollegeTotals(totals);
 
@@ -61,12 +60,22 @@ const Home = () => {
         const placementResponse = await axios.get(
           `${BASE_URL}/api/placement_record`
         );
+
+
         const placementData = placementResponse.data;
 
-        setPlacementDataRecords(placementData);   //setting this to transfer this data to PlacementStatistics component
+        // Filter placement records based on the batch of associated students
+      const filteredPlacementData = placementData.filter((placement) => {
+        const associatedStudent = studentData.find(
+          (student) => student._id === placement.studentId
+        );
+        return associatedStudent && associatedStudent.batch === batch;
+      });
 
-        // Setting total offers which is no of placement records     student can have multiple offer that is counted
-        setTotalOffers(placementData.length);
+      setPlacementDataRecords(filteredPlacementData);   //setting this to transfer this data to PlacementStatistics component
+
+      // Setting total offers which is no of placement records     student can have multiple offer that is counted
+      setTotalOffers(filteredPlacementData.length);
 
         // Initialize placed totals object
         const placedTotals = { PCCOE: 0, PCCOER: 0, NMIT: 0 };
@@ -131,10 +140,29 @@ const Home = () => {
 
   return (
     <>
+              
       <div className="total-statistics-container row">
+      <div>
+      <select className="select-option-college-student-statistics" value={batch} onChange={(e) => setBatch(e.target.value)}>
+                <option value="" disabled>
+                  Select Batch
+                </option>
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+                <option value="2029">2029</option>
+                <option value="2030">2030</option>
+              </select>
+      </div>
         <div className="statistics-card col-lg-4">
           <p className="statistics-title">Total Students</p>
-          <p className="statistics-value">{ loading ? <ClipLoader  />: totalNoOfStudents  }</p>
+          <p className="statistics-value">{ loading ? <ClipLoader  />: collegeTotals.PCCOE + collegeTotals.PCCOER + collegeTotals.NMIT  }</p>
         </div>
         <div className="statistics-card col-lg-4">
           <p className="statistics-title">Total Offers</p>
@@ -172,11 +200,27 @@ const Home = () => {
 
       <div className="container-pie-chart col-lg-6">
         <h4 className="bar-graph-heading">Branchwise Placement Statistics : </h4>
-        <PieChart />
+        <select className="select-option-college-student-statistics" value={batch} onChange={(e) => setBatch(e.target.value)}>
+                <option value="" disabled>
+                  Select Batch
+                </option>
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+                <option value="2029">2029</option>
+                <option value="2030">2030</option>
+              </select>
+        <PieChart batch={batch} />
       </div>
       </div>
 
-      <PlacementStatistics loading={loading} studentDataRecords={studentDataRecords} placementDataRecords={placementDataRecords}/>
+      <PlacementStatistics  loading={loading} studentDataRecords={studentDataRecords} placementDataRecords={placementDataRecords}/>
 
      
        
