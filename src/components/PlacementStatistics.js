@@ -38,14 +38,21 @@ const PlacementStatistics = ({ placementDataRecords, studentDataRecords,loading 
       {placementDataRecords && (
         <div className='placement-statistics-body'>
           <div className="container-inside">
-          <p><span className='Statistics-type'>Highest Package</span> <span className='statistics-value-pacement'>{loading ? <ClipLoader  /> : placementDataRecords.reduce((max, placementRecord) => Math.max(max, parseFloat(placementRecord.ctc)), 0).toFixed(2) }</span></p> 
+          <p><span className='Statistics-type'>Highest Package</span></p> 
+          <p className='statistics-value-pacement'>{loading ? <ClipLoader  /> : placementDataRecords.reduce((max, placementRecord) => Math.max(max, parseFloat(placementRecord.ctc)), 0).toFixed(2) }</p>
           </div>
           <div className="container-inside">
-          <p><span className='Statistics-type'>Average Package</span>  <span className="statistics-value-pacement">{loading ? <ClipLoader /> :totalPlacedStudents > 0 && (totalPlacedPackages / totalPlacedStudents).toFixed(2) }</span></p>
-          <p className='note-message'><strong style={{color:'red'}}>Note: </strong>Considering only placed students and Multiple offers by signle student are allowed</p>
+             <div>
+             <p><span className='Statistics-type'>Average Package</span></p>
+             <p className="statistics-value-pacement">{loading ? <ClipLoader /> :totalPlacedStudents > 0 ? (totalPlacedPackages / totalPlacedStudents).toFixed(2) : "0.00" }</p>
+             </div>
+             <p className='note-message'><strong style={{color:'red'}}>Note: </strong>Considering only placed students and Multiple offers by signle student are allowed</p>
           </div>
           <div className="container-inside">
-          <p><span className='Statistics-type'>Average Package</span>  <span className="statistics-value-pacement">{loading ? <ClipLoader  /> : averagePackageHighestOffer.toFixed(2)}</span></p>
+         <div>
+         <p><span className='Statistics-type'>Average Package</span></p>
+          <p className="statistics-value-pacement">{loading ? <ClipLoader  /> : averagePackageHighestOffer.toFixed(2)}</p>
+         </div>
           <p className='note-message'><strong style={{color:'red'}}>Note:</strong> Only the highest offer made to a student is considered. If a student receives multiple offers, only the highest one is taken into account for calculating the average package.</p>
           </div>
           {/* <div className="container-inside">

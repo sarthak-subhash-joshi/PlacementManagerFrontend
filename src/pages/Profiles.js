@@ -7,20 +7,23 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PacmanLoader from "react-spinners/FadeLoader";
 import { BASE_URL } from "../Helper";
+import BulkStudentDataUpload from "../components/BulkStudentDataUpload";
 
 
 const Profiles = () => {
   const { students, dispatch } = useStudentRecordContext();
-  const pageSize = 10;
+  const[pageSize,setPageSize]=useState(10);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredStudents, setFilteredStudents] = useState([]);
 
+  const[placementData,setPlacementData]=useState([])
+
   useEffect(() => {
     fetchRecordCount();
-  }, [currentPage, searchTerm, dispatch]);
+  }, [currentPage, searchTerm, dispatch,pageSize]);
 
   const fetchRecordCount = async () => {
     try {
@@ -32,6 +35,10 @@ const Profiles = () => {
       const start = (currentPage - 1) * pageSize;
       const end = start + pageSize;
       setFilteredStudents(response.data.slice(start, end));
+
+      const placementResponse = await axios.get(`${BASE_URL}/api/placement_record`);
+      setPlacementData(placementResponse.data);
+
     } catch (error) {
       console.error("Error fetching record count:", error);
     }
@@ -81,19 +88,19 @@ const Profiles = () => {
         />
       </div>
 
-      <div className="container-home-top">
-        <div className="add-delete-btns-container">
+      <div className="container-home-top ">
           <NavLink to="/add_student">
             <button id="addUserBtn" type="button" className="btn btn-success">
               <i className="fa-solid fa-plus"></i> Add Student 
             </button>
           </NavLink>
-        </div>
+         <BulkStudentDataUpload/>
+
       </div>
 
      
     
-      <div  className="subject-container col-lg-8">
+      <div  className="subject-container ">
         <h4 className="subject-heading">Student's Data (Master Data)</h4>
         {filteredStudents.length === 0 ? (
           <>
@@ -112,6 +119,9 @@ const Profiles = () => {
               <th className="row-border">Mobile Number</th>
               <th className="row-border">Course</th>
               <th className="row-border">Branch</th>
+              <th className="row-border">Batch</th>
+              <th className="row-border">College</th>
+              <th className="row-border">Status</th>
               <th className="row-border">
                   Preview
               </th>
@@ -135,6 +145,9 @@ const Profiles = () => {
                 <td className="row-border">{student.mobileNo}</td>
                 <td className="row-border">{student.course}</td>
                 <td className="row-border">{student.branch}</td>
+                <td className="row-border">{student.batch}</td>
+                <td className="row-border">{student.collegeName}</td>
+                <td className="row-border" style={{color:"#008DDA",fontWeight:'bolder'}}>{placementData.find(entry => entry.studentId === student._id) !== undefined  ? 'Placed' : 'Unplaced'}</td>
                 <td  className="row-border btn-container">
                   <NavLink to={`/profile/${student._id}`}>  <i className="fa-regular fa-eye preview-icon"></i></NavLink>
                 </td>
@@ -151,32 +164,54 @@ const Profiles = () => {
           </div>
        
 
-
+          <div>
+        <select style={{width:'70px'}} value={pageSize} onChange={(e) => setPageSize(parseInt(e.target.value))}>
+  <option value="" disabled>
+  Rows Per Page
+  </option>
+  <option value={5}>5</option> {/* Set value attribute to a number */}
+  <option value={10}>10</option> {/* Set value attribute to a number */}
+  <option value={20}>20</option> {/* Set value attribute to a number */}
+</select>
+        </div>
         <div className="pagination-container">
-        <button className="pagination-btn" onClick={() => handlePageChange(1)}>
-          <i className="fa-solid fa-backward"></i>
+
+        {currentPage !== 1 && (
+    <>
+    <button className="pagination-btn" onClick={() => handlePageChange(1)}>
+          <i className="fa-solid fa-backward fa-lg"></i>
         </button>
         <button
           className="pagination-btn"
           onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
         >
-          <i className="fa-solid fa-caret-left"></i>
+          <i className="fa-solid fa-caret-left fa-lg"></i>
         </button>
+    </>
+  )}
+   
+       
         {currentPage} of {totalPages}
-        <button
+
+        {currentPage !== totalPages && (
+    <>
+    <button
           className="pagination-btn"
           onClick={() =>
             currentPage < totalPages && handlePageChange(currentPage + 1)
           }
         >
-          <i className="fa-solid fa-caret-right"></i>
+          <i className="fa-solid fa-caret-right fa-lg"></i>
         </button>
         <button
           onClick={() => handlePageChange(totalPages)}
           className="pagination-btn"
         >
-          <i className="fa-solid fa-forward"></i>
+          <i className="fa-solid fa-forward fa-lg"></i>
         </button>
+    </>
+  )}
+      
       </div>
 
 

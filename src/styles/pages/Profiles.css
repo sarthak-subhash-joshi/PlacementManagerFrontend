@@ -102,12 +102,12 @@ i{
 .container-home-top{
     position: relative;
     display: flex;
-    margin-bottom: 20px;
     margin: 2% 5% 1%;
+    margin-bottom: 50px;
 }
 
 #addUserBtn{
-    margin: 10px 0 10px;
+    margin: 0 15px;
 }
 
 /* .add-delete-btns-container{

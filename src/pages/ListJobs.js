@@ -12,6 +12,7 @@ const ListJobs = ({ onSubmit }) => {
   const [filteredCandidates, setFilteredCandidates] = useState([]); 
   const [flag,setFlag]=useState(false);
   const [selection, setSelection] = useState(''); // To track the selection (Unplaced or Anyone)
+  const [batch,setBatch]=useState("");
 
   const [loading,setLoading]=useState(false);
 
@@ -56,14 +57,14 @@ const ListJobs = ({ onSubmit }) => {
           return (
             candidate.UGAggregate > parseFloat(minPercentage) &&
             (candidate.gender === 'Male' || candidate.gender === 'Female') &&
-            (!candidateCtc || candidateCtc <= ctcThreshold)
+            (!candidateCtc || candidateCtc <= ctcThreshold) && candidate.batch===batch
           );
         } else {
           // Filter based on selected gender
           return (
             candidate.UGAggregate > parseFloat(minPercentage) &&
             candidate.gender === gender &&
-            (!candidateCtc || candidateCtc <= ctcThreshold)
+            (!candidateCtc || candidateCtc <= ctcThreshold) && candidate.batch===batch
           );
         }
       });
@@ -169,7 +170,33 @@ const ListJobs = ({ onSubmit }) => {
               </div>
             )}
 
-            <button disabled={loading} className='btn btn-success' type="submit">Submit</button>
+
+            <label>Batch:</label>
+              <select value={batch} onChange={(e) => setBatch(e.target.value)} required>
+                <option value="" disabled>
+                  Select Batch
+                </option>
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+                <option value="2029">2029</option>
+                <option value="2030">2030</option>
+                <option value="2031">2031</option>
+                <option value="2032">2032</option>
+                <option value="2033">2033</option>
+                <option value="2034">2034</option>
+                <option value="2035">2035</option>
+              </select>
+
+              
+
+            <button style={{marginTop:'30px'}} disabled={loading} className='btn btn-success' type="submit">Submit</button>
 
           </form>
         </div>
