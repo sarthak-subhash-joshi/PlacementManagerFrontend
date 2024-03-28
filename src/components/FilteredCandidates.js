@@ -1,4 +1,3 @@
-// FilteredCandidates.js
 import React from "react";
 import "../styles/components/FilteredCandidates.css";
 import GridLoader from "react-spinners/GridLoader";
@@ -88,16 +87,7 @@ const FilteredCandidates = ({ candidates, flag, loading }) => {
           </div>
         </>
       ) : flag ? (
-        loading ? (
-          <div className="filtering-loader">
-            <GridLoader color="gray" />{" "}
-            <p style={{ color: "gray" }}>
-              Please check your internet connection and try again
-            </p>
-          </div>
-        ) : (
           <p style={{fontSize:'x-large',textAlign:'center'}}><strong>No such candidates found</strong></p>
-        )
       ) : (
         <p style={{textAlign:'center'}}>Apply criteria to find eligible candidates.</p>
       )}

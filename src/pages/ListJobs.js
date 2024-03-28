@@ -1,9 +1,9 @@
-// ListJobs.js
 import React, { useState } from 'react';
 import FilteredCandidates from '../components/FilteredCandidates';
 import axios from 'axios';
 import '../styles/pages/ListJobs.css';
 import { BASE_URL } from '../Helper';
+import GridLoader from "react-spinners/GridLoader";
 
 const ListJobs = ({ onSubmit }) => {
   const [minPercentage, setMinPercentage] = useState('');
@@ -15,11 +15,18 @@ const ListJobs = ({ onSubmit }) => {
   const [batch,setBatch]=useState("");
 
   const [loading,setLoading]=useState(false);
+  const [showTimeoutMessage, setShowTimeoutMessage] = useState(false);
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     setLoading(true)  //setting loading 
+
+     // Start timeout for displaying message after 1.5 minutes
+     const timeoutId = setTimeout(() => {
+      setShowTimeoutMessage(true);
+    }, 90000); // 1.5 minutes
 
     if (!selection) { // If no selection has been made
       alert('Please select "Unplaced" or "Anyone" before submitting.'); // Show alert
@@ -83,6 +90,7 @@ const ListJobs = ({ onSubmit }) => {
 
        // Set loading to false when data is fetched
        setLoading(false);
+      
 
     } catch (error) {
       console.error('Error fetching or processing data:', error);
@@ -91,9 +99,11 @@ const ListJobs = ({ onSubmit }) => {
     setFlag(true);
   };
 
+ 
+
   return (
     <>
-      <div className="row list-jobs-container-main">
+      <div className="row list-jobs-container-main align-items-start">
         <div className="criteria-form-container col-lg-3 ">
           <h4 className='form-heading'>Enter Criteria</h4>
           <form onSubmit={handleSubmit}>
@@ -201,7 +211,16 @@ const ListJobs = ({ onSubmit }) => {
           </form>
         </div>
         <div style={{ position: 'relative' }} className="filtered-candidates-container  col-lg-4">
-          <FilteredCandidates loading={loading} candidates={filteredCandidates} flag={flag} />
+       {
+        loading===true ? (
+          <div className="filtering-loader">
+            <GridLoader color="gray" />
+          </div>
+        ) :<FilteredCandidates  candidates={filteredCandidates} flag={flag} />
+       }
+       {loading && showTimeoutMessage && (
+            <p style={{textAlign:'center'}}>It is taking more time than required. Please check your internet connection and try again.</p>
+          )}
         </div>
       </div>
     </>
