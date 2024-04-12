@@ -15,7 +15,8 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+   <>
+     <nav className="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
       <div className="container-fluid">
         <div style={{ position: 'relative' }}>
           <NavLink className="navbar-brand-name" to="/" onClick={closeNavbar}>
@@ -72,6 +73,9 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
+
+
+   </>
   );
 };
 

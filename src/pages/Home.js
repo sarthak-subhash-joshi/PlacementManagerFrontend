@@ -6,6 +6,7 @@ import { BASE_URL } from "../Helper";
 import PlacementStatistics from "../components/PlacementStatistics";
 import PieChart from "../components/PieChart";
 import ClipLoader from "react-spinners/ClipLoader";
+import LoadingMessage from '../components/LoadingMessage'
 
 const Home = () => {
   const [collegeTotals, setCollegeTotals] = useState({
@@ -140,6 +141,10 @@ const Home = () => {
 
   return (
     <>
+
+    {
+      loading && <LoadingMessage/>
+    }
               
       <div className="total-statistics-container row">
       <div>

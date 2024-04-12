@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import PacmanLoader from "react-spinners/FadeLoader";
 import { BASE_URL } from "../Helper";
 import BulkStudentDataUpload from "../components/BulkStudentDataUpload";
+import LoadingMessage from "../components/LoadingMessage";
 
 const Profiles = () => {
   const { students, dispatch } = useStudentRecordContext();
@@ -112,7 +113,10 @@ const Profiles = () => {
         {filteredStudents.length === 0 ? (
           <>
             {searchTerm === "" ? (
+              <>
               <PacmanLoader color="#36d7b7" />
+              <LoadingMessage/>
+              </>
             ) : (
               <div style={{ color: "#00337C" }}>No records found </div>
             )}

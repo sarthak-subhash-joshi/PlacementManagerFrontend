@@ -1,0 +1,24 @@
+.loading-message {
+    padding: 10px;
+    background-color: #5BBCFF;
+    border: 1px solid #ddd;
+    position: relative;
+    font-weight: bolder;
+    text-align: center;
+  }
+  
+  .close-button {
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+    top: 0;
+    font-weight: bolder;
+  }
+  
+  /* Media query for smaller screens */
+  @media (max-width: 480px) {
+    .loading-message {
+        padding-top: 30px;
+      }
+  }
+  
